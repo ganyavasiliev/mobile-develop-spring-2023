@@ -27,12 +27,19 @@ const HomeScreen = (props) => {
 
   const [count, setCount] = useState(0);
 
+  const Func = () => {
+    for (i = 0; i <= 10000000; i++) {}
+    return 1;
+  };
+
   useEffect(() => {
     console.log('Компонент был отмонтирован!');
     return () => {
       console.log('Компонент будет отмонтирован!');
     };
   }, []);
+
+  const memo = useMemo(() => Func(num), [num]);
 
   useEffect(() => {
     console.log('Значение счётчика изменилось!');
@@ -73,7 +80,7 @@ const HomeScreen = (props) => {
         <Text style={styles2}>Вычисляемое свойство: {computed}</Text>
         <Button
           title="use.memo"
-          onPress={() => setNumber((prev) => prev + 1)}
+          onPress={() => setCount(count + memo)}
         />
         <Separator />
         <Text> Count: {count}</Text>
